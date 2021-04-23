@@ -2,14 +2,14 @@
 
 TODO:
 
-Should use context for the handleMove function.
+~~Should use context for the handleMove function.~~ using events
 
 Debug mode.
 
-Move board into folder (components) and rename to map (maybe).
+~~Move board into folder (components) and rename to map (maybe).~~
 
-Look into using events.
+~~Look into using events.~~
 
-Maybe move assets to src.
+~~Maybe move assets to src.~~
 
-Better names for the functions.
+~~Better names for the functions.~~

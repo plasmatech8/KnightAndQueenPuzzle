@@ -8,11 +8,8 @@
   export let y = 0;
   export let piece;
 
-  export let highlight = undefined;
-  export let blocked = false;
-
-
-  export let handleMove;
+  /* export let highlight = undefined;
+  export let blocked = false; */
 
   function coordsToAnno(x, y){
     const xChar = String.fromCharCode(97 + x % 26);
@@ -27,7 +24,7 @@
   style="background: {x%2 === y%2 ? "#b58a59" : "#fff1de"}"
 >
   {#if piece}
-  <Draggable onDrop={handleMove}>
+  <Draggable on:pick on:drop>
     <Piece {...piece}/>
   </Draggable>
   {/if}

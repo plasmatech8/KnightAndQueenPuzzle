@@ -1,14 +1,14 @@
 <script>
-  import { onMount, setContext } from "svelte";
-
+  import { onMount, createEventDispatcher } from "svelte";
   import Cell from './Cell.svelte'
-  export let width = 15;
+
+  export let width = 8;
   export let height = 8;
   export let tiles = Array(width * height).fill().map(() => ({ /* blocked: false, highlight: false, */ piece: undefined }));
-  // export let onMove = undefined;
+  let hoveringTile;
+  let selectedTile;
 
-  let hoveringOver;
-
+  const dispatch = createEventDispatcher();
 
   onMount(() => {
     tiles[4].piece = {id: 1, color: 'black', type: 'queen'};
@@ -21,18 +21,22 @@
     return x + y*width;
   }
 
-  function handleMove(fromTile) {
-    console.log("!!", hoveringOver)
-    if (hoveringOver && fromTile !== hoveringOver) {
-      tiles[hoveringOver] = tiles[fromTile];
-      tiles[fromTile] = undefined;
+  function handlePick(onTile) {
+    selectedTile = onTile;
+    dispatch('pick', { from: onTile });
+  }
+
+  function handleDrop(onTile) {
+    if (hoveringTile != null) {
+      dispatch('drop', { from: onTile, to: hoveringTile });
     }
+    selectedTile = undefined;
   }
 
-  function handleHover(index) {
-    hoveringOver = index;
+  function handleHover(onTile) {
+    hoveringTile = onTile;
+    dispatch('hover', { over: hoveringTile })
   }
-
 
 </script>
 
@@ -45,7 +49,13 @@
   {#each Array.from(Array(height).keys()).reverse() as y}
   {#each Array(width) as _, x}
     <div on:mouseenter={() => handleHover(coordsToIndex(x, y))}>
-      <Cell {...tiles[coordsToIndex(x, y)]} {x} {y} handleMove={() => handleMove(coordsToIndex(x, y))}/>
+      <Cell
+        {...tiles[coordsToIndex(x, y)]}
+        {x}
+        {y}
+        on:drop={() => handleDrop(coordsToIndex(x, y))}
+        on:pick={() => handlePick(coordsToIndex(x, y))}
+      />
     </div>
   {/each}
   {/each}

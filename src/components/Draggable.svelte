@@ -1,31 +1,31 @@
 <script>
+  import { createEventDispatcher } from "svelte";
+
   let startX = 0;
   let startY = 0;
   let deltaX = 0;
   let deltaY = 0;
+  let dragging = false;
+  const dispatch = createEventDispatcher();
 
-  let moving = false;
-
-  export let onDrop;
-  // export let onPick
-
-  function start(e) {
+  function handlePick(e) {
     startX = e.clientX;
     startY = e.clientY;
-    moving = true;
+    dragging = true;
+    dispatch('pick', {});
   }
 
-  function drop() {
+  function handleDrop() {
     deltaX = 0;
     deltaY = 0;
-    if (onDrop && moving) {
-      onDrop();
+    if (dragging) {
+      dispatch('drop', {});
     }
-    moving = false;
+    dragging = false;
   }
 
-  function move(e) {
-    if (moving) {
+  function handleDrag(e) {
+    if (dragging) {
       deltaX = e.clientX - startX;
       deltaY = e.clientY - startY;
     }
@@ -35,12 +35,12 @@
 <div
   class="draggable"
   style="transform: translate({deltaX}px, {deltaY}px);"
-  on:mousedown={start}
+  on:mousedown={handlePick}
 >
   <slot></slot>
 </div>
 
-<svelte:window on:mouseup={drop} on:mousemove={move}/>
+<svelte:window on:mouseup={handleDrop} on:mousemove={handleDrag}/>
 
 <style>
   .draggable {
