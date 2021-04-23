@@ -49,7 +49,7 @@
     width: 70px;
     display: grid;
     place-items: center;
-    border: 1px solid red;
+    /* border: 1px solid red; */
   }
 
   svg {
@@ -60,5 +60,6 @@
     transform: scale(150%);
     pointer-events: none;
   }
+
 </style>
 

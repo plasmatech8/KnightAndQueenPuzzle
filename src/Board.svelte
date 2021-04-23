@@ -5,12 +5,16 @@
   export let width = 15;
   export let height = 8;
   export let tiles = Array(width * height).fill().map(() => ({ /* blocked: false, highlight: false, */ piece: undefined }));
+  // export let onMove = undefined;
 
   let hoveringOver;
+
 
   onMount(() => {
     tiles[4].piece = {id: 1, color: 'black', type: 'queen'};
     tiles[5].piece = {id: 2, color: 'white', type: 'knight'};
+    tiles[6].piece = {id: 3, color: 'black', type: 'knight'};
+    tiles[7].piece = {id: 4, color: 'white', type: 'queen'};
   })
 
   function coordsToIndex(x, y){

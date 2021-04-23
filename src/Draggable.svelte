@@ -7,6 +7,7 @@
   let moving = false;
 
   export let onDrop;
+  // export let onPick
 
   function start(e) {
     startX = e.clientX;
@@ -33,7 +34,7 @@
 
 <div
   class="draggable"
-  style="transform: translate({deltaX}px, {deltaY}px); z-index: 100;"
+  style="transform: translate({deltaX}px, {deltaY}px);"
   on:mousedown={start}
 >
   <slot></slot>
@@ -51,6 +52,7 @@
     cursor: grab;
     border: solid 5px yellow;
     pointer-events: none;
+    z-index: 10;
   }
 
 </style>

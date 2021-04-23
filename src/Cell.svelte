@@ -47,7 +47,7 @@
     position: relative;
     width: 80px;
     height: 80px;
-    border: 2px solid green;
+    /* border: 2px solid green; */
     display: grid;
     place-items: center;
   }
@@ -59,12 +59,6 @@
     bottom: 0;
     font-weight: bold;
     font-size: small;
-  }
-
-  .hitbox {
-    width: 100%;
-    height: 100%;
-    z-index: 100;
   }
 
 </style>
