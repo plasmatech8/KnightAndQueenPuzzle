@@ -1,6 +1,6 @@
 <script>
   import Piece from "./Piece.svelte";
-	import Draggable from './Draggable.svelte';
+  import Draggable from "./Draggable.svelte";
 
   export let debug = false;
   export let id;
@@ -8,43 +8,45 @@
   export let y;
   export let piece;
 
-  /* export let highlight = undefined;
-  export let blocked = false; */
+  export let highlight = false;
+  export let blocked = false;
 
-  function coordsToAnno(x, y){
-    const xChar = String.fromCharCode(97 + x % 26);
+  function coordsToAnno(x, y) {
+    const xChar = String.fromCharCode(97 + (x % 26));
     const xCharCount = Math.floor(1 + x / 26);
     return xChar.repeat(xCharCount) + (y + 1);
   }
 </script>
 
-
-<div
-  class="cell"
-  style="background: {x%2 === y%2 ? "#b58a59" : "#fff1de"}"
->
-  {#if piece}
-  <Draggable on:pick on:drop>
-    <Piece {...piece}/>
-  </Draggable>
-  {/if}
-
+<div class="cell" style="background: {x % 2 === y % 2 ? '#b58a59' : '#fff1de'}">
   {#if x === 0 || y === 0}
-  <div class="anno" style="color: {x%2 === y%2 ? "#fff1de" : "#b58a59" }">
-    {coordsToAnno(x,y)}
-  </div>
+    <div class="anno" style="color: {x % 2 === y % 2 ? '#fff1de' : '#b58a59'}">
+      {coordsToAnno(x, y)}
+    </div>
   {/if}
 
   {#if debug}
-  <div class="debug">
-    {id}
-  </div>
+    <div class="debug">{id}</div>
   {/if}
 
+  {#if highlight}
+    <div class="highlight"/>
+  {/if}
+
+  {#if blocked}
+    <div class="blocked"/>
+  {/if}
+
+  {#if piece && piece.player}
+    <Draggable on:pick on:drop>
+      <Piece {...piece} />
+    </Draggable>
+  {:else if piece}
+    <Piece {...piece} />
+  {/if}
 </div>
 
 <style>
-
   .cell {
     user-select: none;
     position: relative;
@@ -53,6 +55,22 @@
     /* border: 2px solid green; */
     display: grid;
     place-items: center;
+  }
+
+  .highlight {
+    position: absolute;
+    user-select: none;
+    width: 80px;
+    height: 80px;
+    background-color: rgba(51, 255, 0, 0.193);
+  }
+
+  .blocked {
+    position: absolute;
+    user-select: none;
+    width: 80px;
+    height: 80px;
+    background-color: rgba(0, 0, 0, 0);
   }
 
   .anno {
@@ -71,5 +89,4 @@
     top: 0;
     font-size: small;
   }
-
 </style>

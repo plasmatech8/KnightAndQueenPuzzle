@@ -5,7 +5,7 @@
   export let debug = false;
   export let width = 8;
   export let height = 8;
-  export let tiles = Array(width * height).fill().map(() => ({ /* blocked: false, highlight: false, */ piece: undefined }));
+  export let tiles = Array(width * height).fill().map(() => ({ blocked: false, highlight: false, piece: undefined, highlight: "red" }));
   let hoveringTile;
 
   const dispatch = createEventDispatcher();

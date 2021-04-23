@@ -1,5 +1,4 @@
 <script>
-  export let id;
   export let type = "queen";
   export let color = "white";
 
@@ -15,7 +14,6 @@
   import bishobDark from '../assets/Chess_bdt45.svg';
   import knightDark from '../assets/Chess_ndt45.svg';
   import pawnDark from '../assets/Chess_pdt45.svg';
-
 
   let spriteMap = {
     white: {

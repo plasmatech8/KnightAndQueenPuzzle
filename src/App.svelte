@@ -4,12 +4,29 @@
 
   let width = 8;
   let height = 8;
-  let tiles = Array(width * height).fill().map(() => ({ /* blocked: false, highlight: false, */ piece: undefined }));
-	let debug = true
+  let tiles = Array(width * height).fill().map(() => ({ blocked: false, highlight: false, piece: undefined }));
+	let debug = false
 
   onMount(() => {
-    tiles[35].piece = {id: 3, color: 'black', type: 'queen'};
-    tiles[63].piece = {id: 4, color: 'white', type: 'knight'};
+		// Queen
+		tiles[35].piece = {color: 'black', type: 'queen', player: false};
+
+		// Queen blocked tiles
+		for (let i = 0; i < 8; i++) {
+			tiles[32 + i].blocked = true;
+			tiles[3 + i*8].blocked = true;
+		}
+		for (let i = 0; i < 7; i++) {
+			tiles[8 + i*9].blocked = true;
+		}
+		for (let i = 0; i < 8; i++) {
+			tiles[7 + i*7].blocked = true;
+		}
+
+		// Knight
+		tiles[63].piece = {color: 'white', type: 'knight', player: true};
+		tiles[63].highlight = true;
+
   })
 
 	function handlePick(e){
