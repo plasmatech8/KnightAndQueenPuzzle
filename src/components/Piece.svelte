@@ -1,4 +1,5 @@
 <script>
+  export let player = true;
   export let type = "queen";
   export let color = "white";
 

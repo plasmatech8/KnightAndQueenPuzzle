@@ -4,8 +4,11 @@
 
   let width = 8;
   let height = 8;
-  let tiles = Array(width * height).fill().map(() => ({ blocked: false, highlight: false, piece: undefined }));
+  let tiles = Array(width * height).fill().map(() => ({ blocked: false, highlight: false, visited: false, piece: undefined }));
 	let debug = false
+	let target = 61;
+
+	const knightMoveDeltas = [-15, 15, -17, 17, -10, 10, -6, 6]
 
   onMount(() => {
 		// Queen
@@ -25,19 +28,52 @@
 
 		// Knight
 		tiles[63].piece = {color: 'white', type: 'knight', player: true};
-		tiles[63].highlight = true;
-
-  })
+		tiles[61].highlight = true;
+		tiles[63].visited = true;
+		tiles[62].visited = true;
+  });
 
 	function handlePick(e){
 		//console.log('pick', e.detail.from)
 	}
 
 	function handleDrop(e){
-		console.log('drop', e.detail.from, e.detail.to)
+		//console.log('drop', e.detail.from, e.detail.to)
 		const piece = tiles[e.detail.from].piece;
-		tiles[e.detail.from].piece = undefined;
-		tiles[e.detail.to].piece = piece;
+		const blocked = tiles[e.detail.to].blocked;
+
+		// Idle
+		if (e.detail.from === e.detail.to){
+			return
+		}
+
+		// Blocked
+		if (blocked) {
+			console.error('blocked!');
+			return;
+		}
+
+		// Valid move
+		if (knightMoveDeltas.includes(e.detail.from - e.detail.to)) {
+			tiles[e.detail.from].piece = undefined;
+			tiles[e.detail.to].piece = piece;
+			// Update the target if we landed on the current target square
+			if (e.detail.to === target) {
+				tiles[e.detail.to].highlight = false;
+				tiles[target].visited = true;
+				target -= 1;
+				while (tiles[target].blocked) {
+					tiles[target].visited = true;
+					target -= 1;
+				}
+				tiles[target].highlight = true;
+				console.log(`New target square is ${target}`)
+			}
+			return;
+		}
+
+		// Invalid move
+		console.error('invalid move');
 	}
 
 	function handleHover(e){
@@ -47,7 +83,7 @@
 </script>
 
 <main>
-	<h1>Hello</h1>
+	<h1>♘ Knight and Queen Puzzle ♕</h1>
 	<br>
 	<Board
 		{tiles}

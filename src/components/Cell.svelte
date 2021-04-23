@@ -8,6 +8,7 @@
   export let y;
   export let piece;
 
+  export let visited = false;
   export let highlight = false;
   export let blocked = false;
 
@@ -30,11 +31,15 @@
   {/if}
 
   {#if highlight}
-    <div class="highlight"/>
+    <div class="overlay highlight"/>
   {/if}
 
   {#if blocked}
-    <div class="blocked"/>
+    <div class="overlay blocked"/>
+  {/if}
+
+  {#if visited}
+    <div class="overlay visited"/>
   {/if}
 
   {#if piece && piece.player}
@@ -56,21 +61,23 @@
     display: grid;
     place-items: center;
   }
-
-  .highlight {
+  .overlay {
     position: absolute;
     user-select: none;
     width: 80px;
     height: 80px;
-    background-color: rgba(51, 255, 0, 0.193);
+  }
+
+  .highlight {
+    background-color: rgba(0, 255, 0, 0.3);
+  }
+
+  .visited {
+    box-shadow: inset 0 0 5px 5px rgba(0, 255, 0, 0.3);
   }
 
   .blocked {
-    position: absolute;
-    user-select: none;
-    width: 80px;
-    height: 80px;
-    background-color: rgba(0, 0, 0, 0);
+    background-color: rgba(255, 0, 0, 0.4);
   }
 
   .anno {
