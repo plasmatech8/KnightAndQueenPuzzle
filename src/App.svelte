@@ -7,15 +7,15 @@
   let tiles = Array(width * height).fill().map(() => ({ /* blocked: false, highlight: false, */ piece: undefined }));
 
   onMount(() => {
-    tiles[4].piece = {id: 1, color: 'black', type: 'queen'};
-    tiles[5].piece = {id: 2, color: 'white', type: 'knight'};
-    tiles[6].piece = {id: 3, color: 'black', type: 'knight'};
-    tiles[7].piece = {id: 4, color: 'white', type: 'queen'};
+    tiles[0].piece = {id: 1, color: 'black', type: 'queen'};
+    tiles[1].piece = {id: 2, color: 'white', type: 'knight'};
+    tiles[2].piece = {id: 3, color: 'black', type: 'knight'};
+    tiles[3].piece = {id: 4, color: 'white', type: 'queen'};
   })
 
 
 	function handlePick(e){
-		console.log('pick', e.detail.from)
+		//console.log('pick', e.detail.from)
 	}
 
 	function handleDrop(e){

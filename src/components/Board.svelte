@@ -6,20 +6,16 @@
   export let height = 8;
   export let tiles = Array(width * height).fill().map(() => ({ /* blocked: false, highlight: false, */ piece: undefined }));
   let hoveringTile;
-  let selectedTile;
 
   const dispatch = createEventDispatcher();
 
-  onMount(() => {
-    tiles[4].piece = {id: 1, color: 'black', type: 'queen'};
-    tiles[5].piece = {id: 2, color: 'white', type: 'knight'};
-    tiles[6].piece = {id: 3, color: 'black', type: 'knight'};
-    tiles[7].piece = {id: 4, color: 'white', type: 'queen'};
-  })
+  // ========= Utils
 
   function coordsToIndex(x, y){
     return x + y*width;
   }
+
+  // ========= Handlers
 
   function handlePick(onTile) {
     selectedTile = onTile;
@@ -30,7 +26,6 @@
     if (hoveringTile != null) {
       dispatch('drop', { from: onTile, to: hoveringTile });
     }
-    selectedTile = undefined;
   }
 
   function handleHover(onTile) {
