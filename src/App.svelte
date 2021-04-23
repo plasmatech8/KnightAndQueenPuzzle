@@ -2,17 +2,15 @@
 	import { onMount } from 'svelte';
 	import Board from './components/Board.svelte';
 
-  let width = 15;
+  let width = 8;
   let height = 8;
   let tiles = Array(width * height).fill().map(() => ({ /* blocked: false, highlight: false, */ piece: undefined }));
+	let debug = true
 
   onMount(() => {
-    tiles[0].piece = {id: 1, color: 'black', type: 'queen'};
-    tiles[1].piece = {id: 2, color: 'white', type: 'knight'};
-    tiles[2].piece = {id: 3, color: 'black', type: 'knight'};
-    tiles[3].piece = {id: 4, color: 'white', type: 'queen'};
+    tiles[35].piece = {id: 3, color: 'black', type: 'queen'};
+    tiles[63].piece = {id: 4, color: 'white', type: 'knight'};
   })
-
 
 	function handlePick(e){
 		//console.log('pick', e.detail.from)
@@ -41,6 +39,7 @@
 		on:pick={handlePick}
 		on:drop={handleDrop}
 		on:hover={handleHover}
+		{debug}
 	/>
 </main>
 

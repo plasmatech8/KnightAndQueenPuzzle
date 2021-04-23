@@ -1,11 +1,11 @@
 <script>
-  import { getContext } from 'svelte';
-
   import Piece from "./Piece.svelte";
 	import Draggable from './Draggable.svelte';
 
-  export let x = 0;
-  export let y = 0;
+  export let debug = false;
+  export let id;
+  export let x;
+  export let y;
   export let piece;
 
   /* export let highlight = undefined;
@@ -34,8 +34,14 @@
     {coordsToAnno(x,y)}
   </div>
   {/if}
-</div>
 
+  {#if debug}
+  <div class="debug">
+    {id}
+  </div>
+  {/if}
+
+</div>
 
 <style>
 
@@ -55,6 +61,14 @@
     left: 3px;
     bottom: 0;
     font-weight: bold;
+    font-size: small;
+  }
+
+  .debug {
+    user-select: none;
+    position: absolute;
+    left: 3px;
+    top: 0;
     font-size: small;
   }
 

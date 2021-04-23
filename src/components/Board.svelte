@@ -1,7 +1,8 @@
 <script>
-  import { onMount, createEventDispatcher } from "svelte";
+  import { createEventDispatcher } from "svelte";
   import Cell from './Cell.svelte'
 
+  export let debug = false;
   export let width = 8;
   export let height = 8;
   export let tiles = Array(width * height).fill().map(() => ({ /* blocked: false, highlight: false, */ piece: undefined }));
@@ -18,7 +19,6 @@
   // ========= Handlers
 
   function handlePick(onTile) {
-    selectedTile = onTile;
     dispatch('pick', { from: onTile });
   }
 
@@ -46,8 +46,10 @@
     <div on:mouseenter={() => handleHover(coordsToIndex(x, y))}>
       <Cell
         {...tiles[coordsToIndex(x, y)]}
+        id={coordsToIndex(x, y)}
         {x}
         {y}
+        {debug}
         on:drop={() => handleDrop(coordsToIndex(x, y))}
         on:pick={() => handlePick(coordsToIndex(x, y))}
       />
