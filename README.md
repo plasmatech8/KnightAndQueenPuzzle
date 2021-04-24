@@ -8,30 +8,18 @@ Rules:
 * Without capturing the black queen (♛)
 * Starting from right to left (⬅️), top to bottom (⬇️)
 
-Built by [Mark Connelly](https://github.com/plasmatech8/KnightAndQueenPuzzle)
-inspired by [Ben Finegold](https://www.youtube.com/watch?v=SrQlpY_eGYU) on YouTube.
+Built by [Mark Connelly](https://github.com/plasmatech8/) using:
+* [Svelte](https://github.com/sveltejs/svelte)
 
-## Potential TODOs
+Inspired by [Ben Finegold](https://www.youtube.com/watch?v=SrQlpY_eGYU) on YouTube:
+* [Ben Finegold: Master The Knight Moves Like Bob Seger with this Chess Puzzle](https://www.youtube.com/watch?v=SrQlpY_eGYU)
 
-* ~~Should use context for the handleMove function.~~ using events
-* ~~Debug mode.~~
-* ~~Move board into folder (components) and rename to map (maybe).~~
-* ~~Look into using events.~~
-* ~~Maybe move assets to src.~~
-* ~~Better names for the functions.~~
-* ~~Sidebar~~
-* ~~Move tracker~~
-* ~~Timer~~
-* ~~Blocked marker toggle~~
-* ~~Center~~
-* ~~Finish~~
-* arrows
-* Favicon
-* Raycast for blocks
-* Change queen position
-* Error marker
-* ~~Togglable blocked tiles highlight color~~
 
+## Assets
+
+Sound effects (OGG): https://github.com/ornicar/lila/tree/master/public/sound
+
+Piece sprites (SVG): https://commons.wikimedia.org/wiki/Category:SVG_chess_pieces
 
 ## Improvements
 
@@ -66,8 +54,24 @@ Use context + store for tiles instead of passing props
 This global store can be used to more easily send influence tiles graphics (i.e. highlight,
 flashing, colors, sizes) without passing dozens of props.
 
-## Assets
+## Potential TODOs
 
-Sound effects (OGG): https://github.com/ornicar/lila/tree/master/public/sound
+* ~~Should use context for the handleMove function.~~ using events
+* ~~Debug mode.~~
+* ~~Move board into folder (components) and rename to map (maybe).~~
+* ~~Look into using events.~~
+* ~~Maybe move assets to src.~~
+* ~~Better names for the functions.~~
+* ~~Sidebar~~
+* ~~Move tracker~~
+* ~~Timer~~
+* ~~Blocked marker toggle~~
+* ~~Center~~
+* ~~Finish~~
+* arrows
+* Favicon
+* Raycast for blocks
+* Change queen position
+* Error marker
+* ~~Togglable blocked tiles highlight color~~
 
-Piece sprites (SVG): https://commons.wikimedia.org/wiki/Category:SVG_chess_pieces
