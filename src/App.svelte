@@ -135,25 +135,31 @@
 <main>
 	<h1>♘ Knight and Queen Puzzle ♕</h1>
 	<br>
+	<div class="content">
+
 		<div class="container">
-				<Board
-				{tiles}
-				{width}
-				{height}
-				{showBlocked}
-				{showDebug}
-				on:pick={handlePick}
-				on:drop={handleDrop}
-				on:hover={handleHover}
+			<Board
+			{tiles}
+			{width}
+			{height}
+			{showBlocked}
+			{showDebug}
+			on:pick={handlePick}
+			on:drop={handleDrop}
+			on:hover={handleHover}
 			/>
-	</div>
-	<div class="sidebar">
-		<Sidebar {startTime} {stopped} {moves} bind:showDebug bind:showBlocked on:reset={handleReset}></Sidebar>
+		</div>
+		<div class="sidebar">
+			<Sidebar {startTime} {stopped} {moves} bind:showDebug bind:showBlocked on:reset={handleReset}></Sidebar>
+		</div>
 	</div>
 
 </main>
 <footer>
 	<div class="footbox">
+		<p>
+			This is an exercise to challenge your knight maneuvering skills in Chess!
+		</p>
 		Rules:
 		<ul>
 			<li>Touch every possible square with the white knight (♘)</li>
@@ -161,9 +167,6 @@
 			<li>Without capturing the black queen (♛)</li>
 			<li>Starting from right to left (⬅️), top to bottom (⬇️)</li>
 		</ul>
-		<p>
-			This is an exercise to challenge your knight maneuvering in Chess.
-		</p>
 		<p>
 			Built by	<a href="https://github.com/plasmatech8/KnightAndQueenPuzzle">Mark Connelly</a>
 			inspired by <a href="https://www.youtube.com/watch?v=SrQlpY_eGYU">Ben Finegold</a>
@@ -179,7 +182,9 @@
 		text-align: center;
 		padding: 1em;
 		margin: 0 auto;
-		height: 800px;
+	}
+	.content {
+		height: 670px;
 	}
 
 	.footbox {

@@ -75,7 +75,10 @@ export default {
 
 		// If we're building for production (npm run build
 		// instead of npm run dev), minify
-		production && terser()
+		production && terser(),
+
+		copy({ targets: [{ src: 'public/*', dest: 'site' }] }),
+
 	],
 	watch: {
 		clearScreen: false

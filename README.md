@@ -1,6 +1,6 @@
-# KnightAndQueenPuzzle
+# Knight And Queen Puzzle
 
-This is an exercise to challenge your knight maneuvering in Chess.
+This is an exercise to challenge your knight maneuvering skills in Chess.
 
 Rules:
 * Touch every possible square with the white knight (♘)
@@ -13,7 +13,6 @@ Built by [Mark Connelly](https://github.com/plasmatech8/) using:
 
 Inspired by [Ben Finegold](https://www.youtube.com/watch?v=SrQlpY_eGYU) on YouTube:
 * [Ben Finegold: Master The Knight Moves Like Bob Seger with this Chess Puzzle](https://www.youtube.com/watch?v=SrQlpY_eGYU)
-
 
 ## Assets
 
