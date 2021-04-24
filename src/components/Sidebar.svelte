@@ -6,7 +6,7 @@
   export let moves = [];
   export let startTime = 0;
   export let stopped = false;
-  let currentTime = Date.now();
+  let currentTime = startTime;
   let scrollSection;
   let count;
   $: {
@@ -34,9 +34,9 @@
   }
 
   function millisecondsToTime(milli){
-    var milliseconds = milli % 1000;
-    var seconds = Math.floor((milli / 1000) % 60);
-    var minutes = Math.floor((milli / (60 * 1000)) % 60);
+    const milliseconds = milli % 1000;
+    const seconds = Math.max(0, Math.floor((milli / 1000) % 60));
+    const minutes = Math.max(0, Math.floor((milli / (60 * 1000)) % 60));
     return `${minutes}m ${seconds}s `;
   }
 

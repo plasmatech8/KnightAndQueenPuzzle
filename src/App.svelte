@@ -8,8 +8,8 @@
 	let tiles = Array(width * height).fill().map(() => ({ blocked: false, highlight: false, visited: false, piece: undefined }));
 	let target = 61;
 	let moves = [];
-	let startTime = 0;
-	let stopped = false;
+	let startTime = Date.now();
+	let stopped = true;
 
 	let showBlocked = false;
 	let showDebug = false;
@@ -24,7 +24,7 @@
 		target = 61;
 		moves = [];
 		startTime = Date.now();
-		stopped = false;
+		stopped = true;
 
 		// Queen
 		tiles[35].piece = {color: 'black', type: 'queen', player: false};
@@ -84,10 +84,19 @@
 
 		// Valid move
 		if (knightMoveDeltas.includes(e.detail.from - e.detail.to)) {
+
+			// Start timer
+			if (moves.length === 0) {
+				startTime = Date.now();
+				stopped = false;
+			}
+
+			// Relocate the piece
 			new Audio('./sounds/Move.ogg').play();
 			tiles[e.detail.from].piece = undefined;
 			tiles[e.detail.to].piece = piece;
 			moves = [...moves, indexToAnno(e.detail.to)]
+
 			// On target square
 			if (e.detail.to === target) {
 				moves[moves.length - 1] += " ✔️";
