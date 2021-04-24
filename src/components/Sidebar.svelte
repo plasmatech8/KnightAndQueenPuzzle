@@ -1,15 +1,33 @@
 <script>
-  import { createEventDispatcher } from "svelte";
+  import { createEventDispatcher, onMount } from "svelte";
 
   export let showDebug = false;
   export let showBlocked = false;
   export let moves = [];
+  export let startTime = 0;
+  export let stopped = false;
+  let currentTime = Date.now();
   $: count = moves.length;
 
   const dispatch = createEventDispatcher();
 
+  onMount(() => {
+    setInterval(() => {
+      if (!stopped) {
+        currentTime = Date.now();
+      }
+    }, 10)
+  })
+
   function handleReset() {
     dispatch('reset', {})
+  }
+
+  function millisecondsToTime(milli){
+    var milliseconds = milli % 1000;
+    var seconds = Math.floor((milli / 1000) % 60);
+    var minutes = Math.floor((milli / (60 * 1000)) % 60);
+    return `${minutes}m ${seconds}s `;
   }
 
 </script>
@@ -28,9 +46,13 @@
     </label>
   </div>
 
+  <button on:click={handleReset}>Reset</button>
+
   <p>
-    <b>Moves ({count}) </b>
-    <button on:click={handleReset}>Reset</button>
+    <b>Time taken:</b>  {millisecondsToTime(currentTime - startTime)}
+  </p>
+  <p>
+    <b>Moves ({count}): </b>
   </p>
 
   <table>

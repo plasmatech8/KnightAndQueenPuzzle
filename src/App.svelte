@@ -8,6 +8,8 @@
 	let tiles = Array(width * height).fill().map(() => ({ blocked: false, highlight: false, visited: false, piece: undefined }));
 	let target = 61;
 	let moves = [];
+	let startTime = 0;
+	let stopped = false;
 
 	let showBlocked = false;
 	let showDebug = false;
@@ -19,8 +21,10 @@
 	function initBoard() {
 		// Initialise tiles, moves, and play sound effect
 		tiles = Array(width * height).fill().map(() => ({ blocked: false, highlight: false, visited: false, piece: undefined }));
-		moves = [];
 		target = 61;
+		moves = [];
+		startTime = Date.now();
+		stopped = false;
 
 		// Queen
 		tiles[35].piece = {color: 'black', type: 'queen', player: false};
@@ -104,6 +108,7 @@
 				// Victory - no more targets
 				new Audio('./sounds/Victory.ogg').play();
 				moves[moves.length - 1] += " 🏆"
+				stopped = true;
 			}
 			return;
 		}
@@ -134,7 +139,7 @@
 			/>
 	</div>
 	<div class="sidebar">
-		<Sidebar {moves} bind:showDebug bind:showBlocked on:reset={handleReset}></Sidebar>
+		<Sidebar {startTime} {stopped} {moves} bind:showDebug bind:showBlocked on:reset={handleReset}></Sidebar>
 	</div>
 
 </main>
@@ -153,9 +158,10 @@
 		<p>
 			Built by	<a href="https://github.com/plasmatech8/KnightAndQueenPuzzle">Mark Connelly</a>
 			inspired by <a href="https://www.youtube.com/watch?v=SrQlpY_eGYU">Ben Finegold</a>
-			and <a href="https://open.spotify.com/album/5QkOpsZupEPLq186YOrBNe?highlight=spotify:track:6UBjSnyP1O5W5ndJoO9vUk">Bob Seger</a>.
+			on YouTube.
 		</p>
 	</div>
+	<br>
 </footer>
 
 <style>
