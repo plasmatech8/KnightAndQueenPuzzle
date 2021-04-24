@@ -73,7 +73,7 @@
     <tbody bind:this={scrollSection}>
     {#each moves as m, i}
       <tr>
-        <td>{i}</td>
+        <td>{i+1}.</td>
         <td>{m}</td>
       </tr>
       {:else}

@@ -2,6 +2,8 @@
 
 This is an exercise to challenge your knight maneuvering skills in Chess.
 
+[Click here to try this puzzle!](https://plasmatech8.github.io/KnightAndQueenPuzzle/)
+
 Rules:
 * Touch every possible square with the white knight (♘)
 * Without moving into an attacked square (☠)

@@ -12,6 +12,7 @@
   export let visited = false;
   export let highlight = false;
   export let blocked = false;
+  export let error = false;
 
   function coordsToAnno(x, y) {
     const xChar = String.fromCharCode(97 + (x % 26));
@@ -37,6 +38,10 @@
 
   {#if showBlocked && blocked}
     <div class="overlay blocked"/>
+  {/if}
+
+  {#if error}
+    <div class="overlay error"/>
   {/if}
 
   {#if visited}
@@ -96,5 +101,16 @@
     left: 3px;
     top: 0;
     font-size: small;
+  }
+
+  .error {
+    background-color: rgba(255, 0, 0, 0.5);
+    animation: blinker 0.3s linear infinite;
+  }
+
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
   }
 </style>

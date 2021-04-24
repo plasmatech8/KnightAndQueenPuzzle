@@ -79,6 +79,8 @@
 		if (blocked) {
 			new Audio('./sounds/Error.ogg').play();
 			console.info('%cblocked!', "font-weight: bold;");
+			tiles[e.detail.to].error = true;
+			setTimeout(() => tiles[e.detail.to].error = false, 400)
 			return;
 		}
 
@@ -97,7 +99,7 @@
 			tiles[e.detail.to].piece = piece;
 			moves = [...moves, indexToAnno(e.detail.to)]
 
-			// On target square
+			// Handle target square
 			if (e.detail.to === target) {
 				moves[moves.length - 1] += " ✔️";
 				tiles[e.detail.to].highlight = false;
@@ -124,6 +126,9 @@
 
 		// Invalid move
 		console.info('%cinvalid move', "font-weight: bold;");
+		new Audio('./sounds/Error.ogg').play();
+		tiles[e.detail.to].error = true;
+		setTimeout(() => tiles[e.detail.to].error = false, 400)
 	}
 
 	function handleHover(e){
