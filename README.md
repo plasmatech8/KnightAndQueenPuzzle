@@ -4,7 +4,7 @@ TODO:
 
 ~~Should use context for the handleMove function.~~ using events
 
-Debug mode.
+~~Debug mode.~~
 
 ~~Move board into folder (components) and rename to map (maybe).~~
 
@@ -13,3 +13,21 @@ Debug mode.
 ~~Maybe move assets to src.~~
 
 ~~Better names for the functions.~~
+
+Sidebar
+
+Move tracker
+
+Timer
+
+Blocked marker toggle
+
+Center
+
+Finish
+
+Favicon
+
+Raycast for blocks
+
+Change queen position

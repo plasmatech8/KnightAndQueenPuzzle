@@ -85,15 +85,17 @@
 <main>
 	<h1>♘ Knight and Queen Puzzle ♕</h1>
 	<br>
-	<Board
-		{tiles}
-		{width}
+		<div class="container">
+			<Board
+			{tiles}
+			{width}
 		{height}
 		on:pick={handlePick}
 		on:drop={handleDrop}
 		on:hover={handleHover}
 		{debug}
-	/>
+		/>
+	</div>
 </main>
 
 <style>
@@ -103,6 +105,11 @@
 		padding: 1em;
 		max-width: 240px;
 		margin: 0 auto;
+	}
+
+	.container {
+		display: flex;
+  	justify-content: center;
 	}
 
 	h1 {

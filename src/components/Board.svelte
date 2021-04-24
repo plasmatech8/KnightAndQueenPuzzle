@@ -66,6 +66,4 @@
     display: grid;
     position: absolute;
   }
-
-
 </style>

@@ -56,7 +56,7 @@
     width: 45px;
     height: 45px;
     cursor: pointer;
-    transform: scale(150%);
+    transform: scale(160%);
     pointer-events: none;
   }
 

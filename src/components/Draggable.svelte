@@ -50,7 +50,7 @@
   }
   .draggable:active {
     cursor: grab;
-    border: solid 5px yellow;
+    border: solid 4px yellow;
     pointer-events: none;
     z-index: 10;
   }
