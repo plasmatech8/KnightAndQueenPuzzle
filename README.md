@@ -24,7 +24,7 @@ Piece sprites (SVG): https://commons.wikimedia.org/wiki/Category:SVG_chess_piece
 
 ## Improvements
 
-Use context + store for tiles instead of passing props
+Use context + store for tiles instead of passing props. Use it to hold functions as well.
 ```js
 {
     tiles: [{ id, blocked, overlay, color, piece, flashing, annotation, arrow }, {}]
@@ -70,9 +70,9 @@ flashing, colors, sizes) without passing dozens of props.
 * ~~Center~~
 * ~~Finish~~
 * arrows
-* Favicon
+* ~~Favicon~~
 * Raycast for blocks
 * Change queen position
-* Error marker
+* ~~Error marker~~
 * ~~Togglable blocked tiles highlight color~~
 
