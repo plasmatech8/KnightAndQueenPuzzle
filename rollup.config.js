@@ -6,6 +6,7 @@ import { terser } from 'rollup-plugin-terser';
 import css from 'rollup-plugin-css-only';
 
 import svg from 'rollup-plugin-svg-import';
+import copy from 'rollup-plugin-copy';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -41,6 +42,7 @@ export default {
 	plugins: [
 
 		svg({ stringify: true }),
+		copy({ targets: [{ src: 'src/sounds/*', dest: 'public/sounds' }] }),
 
 		svelte({
 			compilerOptions: {

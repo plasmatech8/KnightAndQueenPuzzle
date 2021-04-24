@@ -49,31 +49,40 @@
 
 		// Blocked
 		if (blocked) {
-			console.error('blocked!');
+			new Audio('./sounds/Error.ogg').play();
+			console.info('%cblocked!', "font-weight: bold;");
 			return;
 		}
 
 		// Valid move
 		if (knightMoveDeltas.includes(e.detail.from - e.detail.to)) {
+			new Audio('./sounds/Move.ogg').play();
 			tiles[e.detail.from].piece = undefined;
 			tiles[e.detail.to].piece = piece;
-			// Update the target if we landed on the current target square
+			// On target square
 			if (e.detail.to === target) {
 				tiles[e.detail.to].highlight = false;
 				tiles[target].visited = true;
-				target -= 1;
-				while (tiles[target].blocked) {
-					tiles[target].visited = true;
+				while (target > 0) {
 					target -= 1;
+					if (tiles[target].blocked) {
+						// Blocked - continue to next square
+						tiles[target].visited = true;
+					} else {
+						// Target - found next valid target square
+						tiles[target].highlight = true;
+						console.info(`%cnext target is ${target}!`, "font-weight: bold;");
+						return;
+					}
 				}
-				tiles[target].highlight = true;
-				console.log(`New target square is ${target}`)
+				// Victory - no more targets
+				new Audio('./sounds/Victory.ogg').play();
 			}
 			return;
 		}
 
 		// Invalid move
-		console.error('invalid move');
+		console.info('%cinvalid move', "font-weight: bold;");
 	}
 
 	function handleHover(e){

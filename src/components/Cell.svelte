@@ -77,7 +77,7 @@
   }
 
   .blocked {
-    background-color: rgba(255, 0, 0, 0.4);
+    /* background-color: rgba(255, 0, 0, 0.4); */
   }
 
   .anno {
