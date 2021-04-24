@@ -7,7 +7,17 @@
   export let startTime = 0;
   export let stopped = false;
   let currentTime = Date.now();
-  $: count = moves.length;
+  let scrollSection;
+  let count;
+  $: {
+    count = moves.length;
+    if(scrollSection){
+      setTimeout(() => {
+        count;
+        scrollSection.scrollTo(0, scrollSection.scrollHeight)
+      }, 1);
+    }
+  }
 
   const dispatch = createEventDispatcher();
 
@@ -42,7 +52,7 @@
   <div>
     <label>
       <input type=checkbox bind:checked={showBlocked}>
-      Show blocked tiles
+      Show blocked squares
     </label>
   </div>
 
@@ -60,12 +70,16 @@
       <th class="id"><div>id</div></th>
       <th class="to"><div>to</div></th>
     </thead>
-    <tbody>
+    <tbody bind:this={scrollSection}>
     {#each moves as m, i}
       <tr>
         <td>{i}</td>
         <td>{m}</td>
       </tr>
+      {:else}
+      <p>
+        Make a move!
+      </p>
       {/each}
     </tbody>
   </table>
@@ -86,10 +100,23 @@ table {
   border-collapse: collapse;
   width: 100%;
 }
-tbody {
-  overflow: scroll;    /* Trigger vertical scroll    */
-}
 th {
   background-color: lightgrey;
+  width: 125px;
+}
+td {
+  width: 125px;
+}
+table tbody {
+  max-height: 400px;
+  overflow-y: scroll;
+  display:block;
+  width: 250px;
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+table thead {
+  display:block;  background-color: blue;
 }
 </style>

@@ -8,18 +8,18 @@ TODO:
 * ~~Look into using events.~~
 * ~~Maybe move assets to src.~~
 * ~~Better names for the functions.~~
-* Sidebar
-* Move tracker
-* Timer
-* Blocked marker toggle
-* Center
+* ~~Sidebar~~
+* ~~Move tracker~~
+* ~~Timer~~
+* ~~Blocked marker toggle~~
+* ~~Center~~
 * ~~Finish~~
 * arrows
 * Favicon
 * Raycast for blocks
 * Change queen position
 * Error marker
-* Togglable blocked tiles highlight color
+* ~~Togglable blocked tiles highlight color~~
 
 
 ## Improvements
