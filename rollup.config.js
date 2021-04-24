@@ -77,7 +77,7 @@ export default {
 		// instead of npm run dev), minify
 		production && terser(),
 
-		copy({ targets: [{ src: 'public/*', dest: 'site' }] }),
+		copy({ targets: [{ src: 'public/*', dest: 'docs' }] }),
 
 	],
 	watch: {
