@@ -1,16 +1,27 @@
 <script>
 	import { onMount } from 'svelte';
 	import Board from './components/Board.svelte';
+	import Sidebar from './components/Sidebar.svelte';
 
   let width = 8;
   let height = 8;
-  let tiles = Array(width * height).fill().map(() => ({ blocked: false, highlight: false, visited: false, piece: undefined }));
-	let debug = false
+	let tiles = Array(width * height).fill().map(() => ({ blocked: false, highlight: false, visited: false, piece: undefined }));
 	let target = 61;
+	let moves = [];
+
+	let showBlocked = false;
+	let showDebug = false;
 
 	const knightMoveDeltas = [-15, 15, -17, 17, -10, 10, -6, 6]
 
-  onMount(() => {
+	onMount(initBoard);
+
+	function initBoard() {
+		// Initialise tiles, moves, and play sound effect
+		tiles = Array(width * height).fill().map(() => ({ blocked: false, highlight: false, visited: false, piece: undefined }));
+		moves = [];
+		target = 61;
+
 		// Queen
 		tiles[35].piece = {color: 'black', type: 'queen', player: false};
 
@@ -31,7 +42,20 @@
 		tiles[61].highlight = true;
 		tiles[63].visited = true;
 		tiles[62].visited = true;
-  });
+	}
+
+	function handleReset(e) {
+		new Audio('./sounds/Select.ogg').play();
+		initBoard();
+	}
+
+	function indexToAnno(id) {
+		const y = Math.floor(id/width);
+		const x = id % width;
+    const xChar = String.fromCharCode(97 + (x % 26));
+    const xCharCount = Math.floor(1 + x / 26);
+    return xChar.repeat(xCharCount) + (y + 1);
+  }
 
 	function handlePick(e){
 		//console.log('pick', e.detail.from)
@@ -59,8 +83,10 @@
 			new Audio('./sounds/Move.ogg').play();
 			tiles[e.detail.from].piece = undefined;
 			tiles[e.detail.to].piece = piece;
+			moves = [...moves, indexToAnno(e.detail.to)]
 			// On target square
 			if (e.detail.to === target) {
+				moves[moves.length - 1] += " ✔️";
 				tiles[e.detail.to].highlight = false;
 				tiles[target].visited = true;
 				while (target > 0) {
@@ -77,6 +103,7 @@
 				}
 				// Victory - no more targets
 				new Audio('./sounds/Victory.ogg').play();
+				moves[moves.length - 1] += " 🏆"
 			}
 			return;
 		}
@@ -95,30 +122,66 @@
 	<h1>♘ Knight and Queen Puzzle ♕</h1>
 	<br>
 		<div class="container">
-			<Board
-			{tiles}
-			{width}
-		{height}
-		on:pick={handlePick}
-		on:drop={handleDrop}
-		on:hover={handleHover}
-		{debug}
-		/>
+				<Board
+				{tiles}
+				{width}
+				{height}
+				{showBlocked}
+				{showDebug}
+				on:pick={handlePick}
+				on:drop={handleDrop}
+				on:hover={handleHover}
+			/>
 	</div>
+	<div class="sidebar">
+		<Sidebar {moves} bind:showDebug bind:showBlocked on:reset={handleReset}></Sidebar>
+	</div>
+
 </main>
+<footer>
+	<div class="footbox">
+		Rules:
+		<ul>
+			<li>Touch every possible square with the white knight (♘)</li>
+			<li>Without moving into an attacked square (☠)</li>
+			<li>Without capturing the black queen (♛)</li>
+			<li>Starting from right to left (⬅️), top to bottom (⬇️)</li>
+		</ul>
+		<p>
+			This is an exercise to challenge your knight maneuvering in Chess.
+		</p>
+		<p>
+			Built by	<a href="https://github.com/plasmatech8/KnightAndQueenPuzzle">Mark Connelly</a>
+			inspired by <a href="https://www.youtube.com/watch?v=SrQlpY_eGYU">Ben Finegold</a>
+			and <a href="https://open.spotify.com/album/5QkOpsZupEPLq186YOrBNe?highlight=spotify:track:6UBjSnyP1O5W5ndJoO9vUk">Bob Seger</a>.
+		</p>
+	</div>
+</footer>
 
 <style>
 
 	main {
 		text-align: center;
 		padding: 1em;
-		max-width: 240px;
 		margin: 0 auto;
+		height: 800px;
+	}
+
+	.footbox {
+		margin: auto;
+		max-width: 600px;
 	}
 
 	.container {
 		display: flex;
-  	justify-content: center;
+		justify-content: center;
+	}
+
+	.sidebar {
+		float: right;
+		border: 5px solid black;
+		padding: 10px;
+		width: 250px;
 	}
 
 	h1 {

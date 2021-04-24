@@ -13,7 +13,7 @@ TODO:
 * Timer
 * Blocked marker toggle
 * Center
-* Finish
+* ~~Finish~~
 * arrows
 * Favicon
 * Raycast for blocks

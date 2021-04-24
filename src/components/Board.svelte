@@ -2,7 +2,8 @@
   import { createEventDispatcher } from "svelte";
   import Cell from './Cell.svelte'
 
-  export let debug = false;
+  export let showBlocked = false;
+  export let showDebug = false;
   export let width = 8;
   export let height = 8;
   export let tiles = Array(width * height).fill().map(() => ({ blocked: false, highlight: false, piece: undefined, highlight: "red" }));
@@ -49,7 +50,8 @@
         id={coordsToIndex(x, y)}
         {x}
         {y}
-        {debug}
+        {showBlocked}
+        {showDebug}
         on:drop={() => handleDrop(coordsToIndex(x, y))}
         on:pick={() => handlePick(coordsToIndex(x, y))}
       />

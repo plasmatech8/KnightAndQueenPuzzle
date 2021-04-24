@@ -2,7 +2,8 @@
   import Piece from "./Piece.svelte";
   import Draggable from "./Draggable.svelte";
 
-  export let debug = false;
+  export let showBlocked = false;
+  export let showDebug = false;
   export let id;
   export let x;
   export let y;
@@ -26,7 +27,7 @@
     </div>
   {/if}
 
-  {#if debug}
+  {#if showDebug}
     <div class="debug">{id}</div>
   {/if}
 
@@ -34,7 +35,7 @@
     <div class="overlay highlight"/>
   {/if}
 
-  {#if blocked}
+  {#if showBlocked && blocked}
     <div class="overlay blocked"/>
   {/if}
 
@@ -77,7 +78,7 @@
   }
 
   .blocked {
-    /* background-color: rgba(255, 0, 0, 0.4); */
+    background-color: rgba(255, 0, 0, 0.4);
   }
 
   .anno {
