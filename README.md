@@ -1,6 +1,17 @@
 # KnightAndQueenPuzzle
 
-TODO:
+This is an exercise to challenge your knight maneuvering in Chess.
+
+Rules:
+* Touch every possible square with the white knight (♘)
+* Without moving into an attacked square (☠)
+* Without capturing the black queen (♛)
+* Starting from right to left (⬅️), top to bottom (⬇️)
+
+Built by [Mark Connelly](https://github.com/plasmatech8/KnightAndQueenPuzzle)
+inspired by [Ben Finegold](https://www.youtube.com/watch?v=SrQlpY_eGYU) on YouTube.
+
+## Potential TODOs
 
 * ~~Should use context for the handleMove function.~~ using events
 * ~~Debug mode.~~
