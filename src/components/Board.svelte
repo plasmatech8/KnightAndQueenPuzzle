@@ -34,12 +34,18 @@
     dispatch('hover', { over: hoveringTile })
   }
 
+  function handleClick() {
+    const knightPosition = tiles.findIndex(tile => tile?.piece?.type === 'knight')
+		dispatch('drop', { from: knightPosition, to: hoveringTile });
+	}
+
 </script>
 
 <div  class="base"
       style=" grid-template-columns: repeat({width}, 80px [col-start]);
               grid-template-rows: repeat({height}, 80px [col-start]);  "
       on:mouseleave={() => handleHover(undefined)}
+      on:click={() => handleClick()}
 >
 
   {#each Array.from(Array(height).keys()).reverse() as y}
